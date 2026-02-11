@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NIVARA BOTANICALS</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    :root {
+      --primary: #1a4b2e;
+      --secondary: #3d7a4d;
+      --accent-green: #4caf50;
+      --accent-orange: #ff9800;
+      --accent-pink: #e91e63;
+      --accent-purple: #9c27b0;
+      --accent-brown: #795548;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --white: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      background-color: var(--primary);
+      color: white;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    /* ===== NAVBAR ===== */
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background-color: white;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .logo {
+      height: 60px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      min-width: 180px;
+      box-shadow: var(--shadow);
+      border-radius: 6px;
+      z-index: 1000;
+      margin-top: 6px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 16px;
+      color: var(--dark);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .nav-dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-icon {
+      font-size: 1.2rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
+
+    .cart-count::after {
+      content: '0';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #e91e63;
+      color: white;
+      font-size: 0.6rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== HERO CAROUSEL ===== */
+    .hero-carousel {
+      position: relative;
+      height: 85vh;
+      overflow: hidden;
+      background-color: #f5f5f5;
+    }
+
+    .carousel-slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 20px 0 60px;
+      color: #ffffff;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-text {
+      max-width: 500px;
+    }
+
+    .carousel-slide h1,
+    .carousel-slide p {
+      text-align: left;
+      margin: 0;
+    }
+
+    .carousel-slide h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+      color: #162335;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .carousel-slide p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    /* Navigation Arrows */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0,0,0,0.7);
+    }
+
+    .carousel-prev {
+      left: 20px;
+    }
+
+    .carousel-next {
+      right: 20px;
+    }
+
+    /* Dots */
+    .carousel-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: white;
+    }
+
+    /* ===== CONTENT SECTION ===== */
+    .content-section {
+      padding: 80px 20px;
+      background-color: white;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .content-section h2 {
+      font-size: 2.5rem;
+      color: var(--accent-orange);
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--dark);
+      opacity: 0.9;
+    }
+
+    /* ===== SHOP BY CONCERNS SECTION ===== */
+    .shop-by-concerns {
+      padding: 80px 20px;
+      background-color: #fafafa;
+      text-align: center;
+    }
+
+    .section-title-center {
+      font-size: 2.2rem;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .concerns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .concern-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .concern-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+    }
+
+    .concern-icon img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .concern-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--dark);
+      text-align: center;
+    }
+
+    /* ===== OUR STORE SECTION ===== */
+    .our-store-section {
+      padding: 80px 20px;
+      background-color: white;
+    }
+
+    .our-store-section h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .products-carousel-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .carousel-arrow-left,
+    .carousel-arrow-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.1);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--dark);
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .carousel-arrow-left {
+      left: -40px;
+    }
+
+    .carousel-arrow-right {
+      right: -40px;
+    }
+
+    .products-scroll-wrapper {
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 20px 0;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+    }
+
+    .products-scroll-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .products-row {
+      display: flex;
+      gap: 24px;
+      padding: 0 20px;
+    }
+
+    .product-card {
+      flex: 0 0 240px;
+      scroll-snap-align: center;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-img-container {
+      height: 240px;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img-container img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+    }
+
+    .product-info {
+      padding: 16px;
+    }
+
+    .product-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .stars {
+      color: #ffc107;
+      font-size: 0.9rem;
+    }
+
+    .review-count {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .add-to-cart-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ===== VIEW MORE BUTTON ===== */
+    .view-more-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .view-more-btn {
+      display: inline-block;
+      padding: 12px 36px;
+      background-color: var(--primary);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(26, 75, 46, 0.2);
+    }
+
+    .view-more-btn:hover {
+      background-color: #163a24;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(26, 75, 46, 0.3);
+    }
+
+    /* ===== MARQUEE BENEFITS BANNER ===== */
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding: 14px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 18s linear infinite;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 50px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #000;
+      white-space: nowrap;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .marquee-item::before {
+      content: "◉";
+      font-size: 18px;
+      margin-right: 4px;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @media (max-width: 600px) {
+      .marquee-item {
+        font-size: 14px;
+        margin-right: 30px;
+      }
+    }
+
+    /* ===== BRAND VALUES SECTION ===== */
+    .values-section {
+      padding: 80px 40px;
+      background: #fbf8ed;
+    }
+
+    .values {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 80px;
+      text-align: center;
+    }
+
+    .icon {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      background: #7b8f3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon svg {
+      width: 55px;
+      height: 55px;
+      fill: #fff;
+    }
+
+    .values h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: #000;
+    }
+
+    .values p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+      max-width: 320px;
+      margin: auto;
+    }
+
+    .value-box {
+      transition: transform 0.3s ease;
+    }
+
+    .value-box:hover {
+      transform: translateY(-8px);
+    }
+
+    @media (max-width: 900px) {
+      .values {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 60px 20px 30px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+    }
+
+    .footer h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .footer h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--accent-orange);
+    }
+
+    .footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer ul li a {
+      color: #d0e0d0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer ul li a:hover {
+      color: white;
+    }
+
+    .footer-contact p {
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .footer-social a:hover {
+      background: var(--accent-orange);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-size: 0.9rem;
+      color: #b0c5b0;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-social {
+        justify-content: center;
+      }
+    }
+
+    /* ===== FLOATING WHATSAPP BUTTON ===== */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* ===== DIRECTIONAL ANIMATIONS ===== */
+    .animate-left,
+    .animate-right {
+      opacity: 0;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .animate-left {
+      transform: translateX(-30px);
+    }
+
+    .animate-right {
+      transform: translateX(30px);
+    }
+
+    .animate-left.visible,
+    .animate-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-carousel {
+        height: 50vh;
+      }
+
+      .carousel-slide {
+        padding: 0 20px 0 40px;
+      }
+
+      .carousel-slide h1 {
+        font-size: 2.5rem;
+      }
+
+      .carousel-slide p {
+        font-size: 1rem;
+      }
+
+      .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .carousel-prev { left: 12px; }
+      .carousel-next { right: 12px; }
+
+      .nav-links {
+        display: none;
+      }
+
+      .content-section,
+      .shop-by-concerns,
+      .our-store-section,
+      .values-section {
+        padding: 40px 20px;
+      }
+
+      .content-section h2,
+      .section-title-center,
+      .our-store-section h2 {
+        font-size: 1.8rem;
+      }
+
+      .concerns-grid {
+        gap: 24px;
+      }
+
+      .concern-icon {
+        width: 72px;
+        height: 72px;
+      }
+
+      .concern-icon img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .carousel-arrow-left,
+      .carousel-arrow-right {
+        display: none;
+      }
+
+      .products-row {
+        padding: 0 10px;
+      }
+
+      .product-card {
+        flex: 0 0 180px;
+      }
+
+      .product-img-container {
+        height: 180px;
+      }
+
+      .product-img-container img {
+        max-height: 140px;
+      }
+
+      .view-more-btn {
+        padding: 10px 28px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sale Bar -->
+  <div class="top-bar">
+    Winter sale is live | Buy 1 Get 15% OFF &nbsp; • &nbsp; Buy 2 Get 20% OFF &nbsp; • &nbsp; Buy 3 Get 25% OFF &nbsp; • &nbsp; Buy 4 Get 30% OFF
+  </div>
+
+  <!-- Navbar -->
+  <nav class="nav-container">
+    <div>
+      <img src="images/logo.png" alt="NIVARA BOTANICALS Logo" class="logo">
+    </div>
+
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="#">Skin Care <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+          <a href="#">Face Wash</a>
+          <a href="#">Moisturizer</a>
+          <a href="#">Serum</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#">Hair Care <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+          <a href="#">Shampoo</a>
+          <a href="#">Conditioner</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#">Body Care <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+          <a href="#">Lotion</a>
+          <a href="#">Bath Salt</a>
+          <a href="#">Scrub</a>
+        </div>
+      </div>
+      <a href="#">Blogs</a>
+      <a href="#" style="position:relative;">
+        New Launch
+        <span style="position:absolute;top:-8px;right:-8px;background:#e91e63;color:white;font-size:0.6rem;padding:2px 5px;border-radius:4px;">New</span>
+      </a>
+    </div>
+
+    <div class="nav-right">
+      <a href="#" class="nav-icon"><i class="fas fa-search"></i></a>
+      <a href="#" class="nav-icon cart-count"><i class="fas fa-shopping-cart"></i></a>
+      <a href="#" class="nav-icon"><i class="fas fa-user"></i> Login</a>
+    </div>
+  </nav>
+
+  <!-- HERO CAROUSEL -->
+  <section class="hero-carousel" id="heroCarousel">
+    <div class="carousel-slides" id="slides">
+      <div class="carousel-slide" style="background-image: url('/Images/freepik__enhance__59081.jpeg');">
+        <div class="hero-text animate-left">
+          <h1>PURE</h1>
+          <p>Naturally infused botanical bath salts for relaxation, rejuvenation, and glowing skin.</p>
+        </div>
+      </div>
+      <div class="carousel-slide" style="background-image: url('/Images/freepik__enhance__8680.jpeg');">
+        <div class="hero-text animate-left">
+          <h1>PEACEFUL</h1>
+          <p>100% plant-based, cruelty-free, dermatologically tested — safe for all skin types.</p>
+        </div>
+      </div>
+      <div class="carousel-slide" style="background-image: url('/Images/freepik__enhance__83878.jpeg');">
+        <div class="hero-text animate-left">
+          <h1>PURPOSEFUL</h1>
+          <p>Buy 4 Get 30% OFF — Limited time offer. Shop now before it’s gone!</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-arrow carousel-prev" id="prevBtn">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-arrow carousel-next" id="nextBtn">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <div class="carousel-dots" id="dots">
+      <div class="dot active" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+      <div class="dot" data-index="2"></div>
+    </div>
+  </section>
+
+  <!-- Nature Meets NIVARA -->
+  <section class="content-section animate-right">
+    <h2>Nature Meets NIVARA</h2>
+    <p>
+      At NIVARA Botanicals, we believe true skincare harmony lies where nature’s purity meets scientific precision. 
+      Our formulations are crafted with ethically sourced botanicals, enhanced by dermatological research to deliver 
+      visible results without compromise. Every product is vegan, cruelty-free, and designed for real skin — because 
+      beauty should be both effective and kind.
+    </p>
+  </section>
+
+  <!-- SHOP BY CONCERNS SECTION -->
+  <section class="shop-by-concerns animate-left">
+    <h2 class="section-title-center">Shop By Concerns</h2>
+    <div class="concerns-grid">
+      <div class="concern-card animate-left">
+        <div class="concern-icon">
+          <img src="/Images/skin-rash_17910602.png" alt="Dark Spot" loading="lazy">
+        </div>
+        <div class="concern-label">Dark Spot</div>
+      </div>
+
+      <div class="concern-card animate-left">
+        <div class="concern-icon">
+          <img src="/Images/moon-phase_1620846.png" alt="Uneven Skin Tone" loading="lazy">
+        </div>
+        <div class="concern-label">Uneven Skin Tone</div>
+      </div>
+
+      <div class="concern-card animate-left">
+        <div class="concern-icon">
+          <img src="/Images/green-beauty_18238690.png" alt="Anti-Ageing" loading="lazy">
+        </div>
+        <div class="concern-label">Anti-Ageing</div>
+      </div>
+
+      <div class="concern-card animate-left">
+        <div class="concern-icon">
+          <img src="/Images/water-droplet_16757226.png" alt="Hair Fall" loading="lazy">
+        </div>
+        <div class="concern-label">Hair Fall</div>
+      </div>
+
+      <div class="concern-card animate-left">
+        <div class="concern-icon">
+          <img src="/Images/hair-growth_12738922.png" alt="Hair Re-Growth" loading="lazy">
+        </div>
+        <div class="concern-label">Hair Re-Growth</div>
+      </div>
+
+      <div class="concern-card animate-left">
+        <div class="concern-icon">
+          <img src="/Images/acne_12974826.png" alt="Dullness" loading="lazy">
+        </div>
+        <div class="concern-label">Dullness</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR STORE SECTION (NO ANIMATION) -->
+  <section class="our-store-section">
+    <h2>Our Store</h2>
+
+    <div class="products-carousel-container">
+      <button class="carousel-arrow-left" id="storePrev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-arrow-right" id="storeNext">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <div class="products-scroll-wrapper" id="productWrapper">
+        <div class="products-row">
+
+          <!-- ORIGINAL PRODUCTS -->
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__69969.jpeg" alt="Vitamin-C Under Eye Gel">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Under Eye Gel</h3>
+              <div class="product-price">Rs. 399</div>
+              <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count">(8283)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__70944.jpeg" alt="Vitamin-C Face Serum">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Face Serum</h3>
+              <div class="product-price">Rs. 599</div>
+              <div class="rating">
+                <div class="stars">★★★★☆</div>
+                <span class="review-count">(96)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__96523.jpeg" alt="Vitamin-C Foaming Face Wash">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Foaming Face Wash</h3>
+              <div class="product-price">Rs. 399</div>
+              <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count">(222)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__97876.jpeg" alt="Vitamin-C Under Eye Cream">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Under Eye Cream</h3>
+              <div class="product-price">Rs. 399</div>
+              <div class="rating">
+                <div class="stars">★★★★☆</div>
+                <span class="review-count">(1)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__27297.jpeg" alt="Niacinamide Serum">
+            </div>
+            <div class="product-info">
+              <h3>Niacinamide Serum</h3>
+              <div class="product-price">Rs. 499</div>
+              <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count">(124)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__36728.jpeg" alt="Argan Oil Shampoo">
+            </div>
+            <div class="product-info">
+              <h3>Argan Oil Shampoo</h3>
+              <div class="product-price">Rs. 449</div>
+              <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count">(1200)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__talk__94184.jpeg" alt="Keratin Conditioner">
+            </div>
+            <div class="product-info">
+              <h3>Keratin Conditioner</h3>
+              <div class="product-price">Rs. 499</div>
+              <div class="rating">
+                <div class="stars">★★★★☆</div>
+                <span class="review-count">(850)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__20487.jpeg" alt="Acne Spot Corrector">
+            </div>
+            <div class="product-info">
+              <h3>Acne Spot Corrector</h3>
+              <div class="product-price">Rs. 299</div>
+              <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count">(2300)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <!-- DUPLICATED PRODUCTS -->
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__69969.jpeg" alt="Vitamin-C Under Eye Gel">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Under Eye Gel</h3>
+              <div class="product-price">Rs. 399</div>
+              <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count">(8283)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__70944.jpeg" alt="Vitamin-C Face Serum">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Face Serum</h3>
+              <div class="product-price">Rs. 599</div>
+              <div class="rating">
+                <div class="stars">★★★★☆</div>
+                <span class="review-count">(96)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__96523.jpeg" alt="Vitamin-C Foaming Face Wash">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Foaming Face Wash</h3>
+              <div class="product-price">Rs. 399</div>
+              <div class="rating">
+                <div class="stars">★★★★★</div>
+                <span class="review-count">(222)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-container">
+              <img src="/Images/freepik__upload__97876.jpeg" alt="Vitamin-C Under Eye Cream">
+            </div>
+            <div class="product-info">
+              <h3>Vitamin-C Under Eye Cream</h3>
+              <div class="product-price">Rs. 399</div>
+              <div class="rating">
+                <div class="stars">★★★★☆</div>
+                <span class="review-count">(1)</span>
+              </div>
+              <button class="add-to-cart-btn">ADD TO CART</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="view-more-container">
+      <a href="/shop" class="view-more-btn">VIEW MORE</a>
+    </div>
+  </section>
+
+  <!-- MARQUEE BENEFITS BANNER -->
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-item">Rich Botanical Extracts</div>
+      <div class="marquee-item">No Sulphate</div>
+      <div class="marquee-item">No Parabens</div>
+      <div class="marquee-item">Not Tested On Animals</div>
+      <div class="marquee-item">No Silicones</div>
+      <div class="marquee-item">No Preservatives</div>
+      <div class="marquee-item">Rich Botanical Extracts</div>
+      <div class="marquee-item">No Sulphate</div>
+      <div class="marquee-item">No Parabens</div>
+      <div class="marquee-item">Not Tested On Animals</div>
+      <div class="marquee-item">No Silicones</div>
+      <div class="marquee-item">No Preservatives</div>
+    </div>
+  </div>
+
+  <!-- BRAND VALUES SECTION -->
+  <section class="values-section animate-right">
+    <div class="values">
+      <div class="value-box animate-left">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <path d="M32 4c-9.9 0-18 8.1-18 18 0 13 18 38 18 38s18-25 18-38c0-9.9-8.1-18-18-18zm0 24c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"/>
+          </svg>
+        </div>
+        <h3>Sustainably Sourced</h3>
+        <p>Environmentally responsible practices support the health of the plants, communities, and ecosystems we source from.</p>
+      </div>
+
+      <div class="value-box animate-right">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="28"/>
+            <text x="32" y="28" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">USDA</text>
+            <text x="32" y="42" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">ORGANIC</text>
+          </svg>
+        </div>
+        <h3>Certified Organic</h3>
+        <p>Organic ingredients ensure high-quality products that are produced without synthetic pesticides, chemicals, GMOs, or ionizing radiation.</p>
+      </div>
+
+      <div class="value-box animate-left">
+        <div class="icon">
+          <svg viewBox="0 0 64 64">
+            <path d="M10 30l12-12c3-3 7-3 10 0l2 2 2-2c3-3 7-3 10 0l12 12-8 8c-2 2-6 2-8 0l-6-6-6 6c-2 2-6 2-8 0l-8-8z"/>
+          </svg>
+        </div>
+        <h3>Fairly Traded</h3>
+        <p>Equitable supply chains ensure the social and economic well-being of our small farmers, producers, and suppliers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer animate-left">
+    <div class="footer-content">
+      <div class="footer-about">
+        <h3>About NIVARA</h3>
+        <p>
+          Crafted with ethically sourced botanicals, our vegan, cruelty-free formulations blend nature’s purity with scientific precision for real results.
+        </p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919876543210" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Blogs</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-categories">
+        <h3>Categories</h3>
+        <ul>
+          <li><a href="#">Skin Care</a></li>
+          <li><a href="#">Hair Care</a></li>
+          <li><a href="#">Body Care</a></li>
+          <li><a href="#">Beard Care</a></li>
+          <li><a href="#">Combos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>📧 support@nivarabotanicals.com</p>
+        <p>📞 +91 98765 43210</p>
+        <p>📍 Mumbai, Maharashtra, India</p>
+        <a href="https://wa.me/919876543210" target="_blank" style="
+          display: inline-block;
+          margin-top: 12px;
+          padding: 8px 20px;
+          background: #25D366;
+          color: white;
+          text-decoration: none;
+          border-radius: 20px;
+          font-weight: 600;
+        ">
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2026 NIVARA Botanicals. All rights reserved. | Vegan • Cruelty-Free • Sustainable
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/919876543210" class="whatsapp-btn" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- JS: All Logic -->
+  <script>
+    // ===== HERO CAROUSEL =====
+    const slides = document.getElementById('slides');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const heroCarousel = document.getElementById('heroCarousel');
+
+    let currentIndex = 0;
+    let autoPlayInterval;
+
+    function goToSlide(index) {
+      if (index < 0) index = dots.length - 1;
+      if (index >= dots.length) index = 0;
+      currentIndex = index;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+    }
+
+    dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index))));
+    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(() => goToSlide(currentIndex + 1), 6000);
+    }
+    heroCarousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    heroCarousel.addEventListener('mouseleave', () => startAutoPlay());
+    startAutoPlay();
+
+    // ===== AUTO-SCROLL FOR OUR STORE =====
+    const productWrapper = document.getElementById('productWrapper');
+    const storePrev = document.getElementById('storePrev');
+    const storeNext = document.getElementById('storeNext');
+    let storeAutoScrollInterval;
+
+    function getCardWidth() {
+      const card = document.querySelector('.product-card');
+      if (!card) return 264;
+      return card.offsetWidth + 24;
+    }
+
+    function scrollToNextCard() {
+      const cardWidth = getCardWidth();
+      productWrapper.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    }
+
+    function startStoreAutoScroll() {
+      storeAutoScrollInterval = setInterval(scrollToNextCard, 3000);
+    }
+
+    productWrapper.addEventListener('mouseenter', () => {
+      clearInterval(storeAutoScrollInterval);
+    });
+
+    productWrapper.addEventListener('mouseleave', () => {
+      startStoreAutoScroll();
+    });
+
+    storePrev.addEventListener('click', () => {
+      const cardWidth = getCardWidth();
+      productWrapper.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    });
+
+    storeNext.addEventListener('click', () => {
+      const cardWidth = getCardWidth();
+      productWrapper.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    });
+
+    startStoreAutoScroll();
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') scrollToNextCard();
+      if (e.key === 'ArrowLeft') {
+        const cardWidth = getCardWidth();
+        productWrapper.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+      }
+    });
+
+    // ===== DIRECTIONAL ANIMATIONS ON SCROLL =====
+    const animateElements = document.querySelectorAll('.animate-left, .animate-right');
+
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const animateObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          animateObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    animateElements.forEach(el => {
+      // Add staggered delay for concern cards
+      if (el.classList.contains('concern-card')) {
+        const index = Array.from(document.querySelectorAll('.concern-card')).indexOf(el);
+        el.style.transitionDelay = `${index * 80}ms`;
+      }
+      animateObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>
